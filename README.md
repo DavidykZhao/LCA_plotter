@@ -40,5 +40,9 @@ library(poLCA)
 
 ## References:
 Latent class modeling in [STATA](https://www.stata.com/features/overview/latent-class-analysis/) 
+
+
 Latent class modeling in [Mplus](https://stats.idre.ucla.edu/mplus/seminars/lca/)
+
+
 A good blogpost on the use of [poLCA package](https://statistics.ohlsen-web.de/latent-class-analysis-polca/)
