@@ -12,7 +12,13 @@ empirically distinct from each other. For more detailed introduction to the meth
 
 LCA has been extensively used in social science however it is poorly implemented in R compared with its counterparts Mplus or STATA.
 
-This package aims to bridge the gap by providing necessary plotting functions to better understand the model restuls.
+The poLCA package only offers the following 3D plots:
+
+<p align="center">
+  <img src = "https://github.com/DavidykZhao/LCA_plotter/blob/master/materials/3dplot.png" width="500" height="400"/>
+</p>
+
+This package aims to bridge the gap by providing additional plotting functions to better understand the model restuls.
 
 ## Installation
 
@@ -22,6 +28,7 @@ devtools::install_github("DavidykZhao/LCA_plotter")
 ```
 
 ## Examples
+
 In the example, I used the dataset of the [World Value Survey](http://www.worldvaluessurvey.org/wvs.jsp) wave 5. I have cleaned the data and it 
 could be found in the materials folder. This data set contains data from 22 countries on their attitudes towards 6 democracy related questions.
 ** Profile plot **
