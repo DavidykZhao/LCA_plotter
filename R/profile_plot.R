@@ -1,13 +1,22 @@
 
-#' This is a test func
-#' @param n A number
-#' @return hellow world plus n
+#' Function to produce a profile plot for a LDA model object
+#' @param data The dataframe to pass in
+#' @param num_var The number of the variables put into the LCA modeling
+#' @param f the formula for the LDA modeling
+#' @return The ggplot objects
 #' @export
 #'
 #' @examples
-#' a = test_func(3)
-#' print(a)
-profile_plot = function(data){
+#' # Define a formula for the LDA modeling
+#' f = with(data, cbind(tax, religion, free_election, state_aid, civil_rights, women)~1)
+#' profile_plot(data, num_var, f) # This will yield the plot
+#'
+#'
+#'
+#'
+#'
+#'
+profile_plot = function(data, num_var){
   f = with(data, cbind(tax, religion, free_election, state_aid, civil_rights, women)~1)
   min_bic <- 1000000
   for(i in 1:7){
@@ -31,7 +40,7 @@ profile_plot = function(data){
     civil_rights = replicate(n_class, NA),
     women = replicate(n_class, NA))
 
-  for (i in 1:6) {
+  for (i in 1:num_var) {
     if (length(probs[[i]][1,]) < 10) {
       probs[[i]] = cbind(probs[[i]], matrix(0, nrow = nrow(probs[[i]]), ncol = 10 - ncol(probs[[i]])))
     }
@@ -47,7 +56,7 @@ profile_plot = function(data){
     geom_point(size = 2.25, aes(shape = class))+
     geom_line(size = 1.00) +
     labs(x = NULL, y = "Mean value of the response") +
-    theme_bw(base_size = 14)+
+    theme_bw(base_size = 12)+
     ggtitle(paste(paste("class", 1:length(LCA_best_model$P), sep = "_"),
                   round(LCA_best_model$P, 3), collapse = ", "))+
     theme(plot.margin=unit(c(1.5,1.5,1.5,1.2),"cm"))+
