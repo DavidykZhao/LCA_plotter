@@ -1,6 +1,7 @@
 
 #' Function to produce a profile plot for a LDA model object
 #' @param data The dataframe to pass in
+#' @param model the most fit model produced by the function find_best_fit
 #' @param num_var The number of the variables put into the LCA modeling
 #' @param f the formula for the LDA modeling
 #' @return The ggplot objects
@@ -16,7 +17,7 @@
 #'
 #'
 #'
-profile_plot = function(data, num_var){
+profile_plot = function(data, model, num_var, f){
   f = with(data, cbind(tax, religion, free_election, state_aid, civil_rights, women)~1)
   min_bic <- 1000000
   for(i in 1:7){
@@ -28,6 +29,8 @@ profile_plot = function(data, num_var){
       LCA_best_model <- lc
     }
   }
+
+  # TO DO add check on if model has been provided
 
   probs = LCA_best_model$probs
   n_class = length(LCA_best_model$P)
@@ -71,4 +74,37 @@ profile_plot = function(data, num_var){
   #   layout(legend = list(orientation = "h", y = 1.2))
   # print(plotly_p)
   # return(plotly_p)
+}
+
+
+
+
+
+#' Find the most fit model by grid search of number of models
+#' @param data The dataframe to pass in
+#' @param criteria The criteria to choose the best model, default to BIC
+#' @param f the formula for the LDA modeling
+#' @return The model object of the most fit model according to the criteria
+#' @export
+#'
+#' @examples
+#' # Define a formula for the LDA modeling
+#' f = with(data, cbind(tax, religion, free_election, state_aid, civil_rights, women)~1)
+#' find_best_fit(data, f, criteria = 'bic') # This will yield the plot
+#'
+#'
+find_best_fit =function(data, f, criteria = 'bic'){
+  #f = with(data, cbind(tax, religion, free_election, state_aid, civil_rights, women)~1)
+  min_bic <- 1000000
+  for(i in 1:7){
+    lc <- poLCA(f, data, nclass=i, maxiter=3000,
+                tol=1e-5, na.rm=FALSE,
+                nrep=10, verbose=TRUE, calc.se=TRUE)
+    if(lc$criteria < min_criteria){
+      min_criteria <- lc$criteria
+      LCA_best_model <- lc
+    }
+  }
+
+  return(LCA_best_model)
 }
