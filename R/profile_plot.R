@@ -17,7 +17,7 @@
 #'
 #'
 #'
-profile_plot = function(data, model, num_var, f){
+profile_plot = function(data, model = NULL, num_var, f){
   f = with(data, cbind(tax, religion, free_election, state_aid, civil_rights, women)~1)
   min_bic <- 1000000
   for(i in 1:7){
