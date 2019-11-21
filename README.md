@@ -33,5 +33,5 @@ library(poLCA)
 #' profile_plot(data, num_var, f) # This will yield the plot
 ```
 <p align="center">
-  <img src = "https://github.com/DavidykZhao/LCA_plotter/blob/master/materials/All_country_profile_plot.pdf" width="600" height="500"/>
+  <img src = "https://github.com/DavidykZhao/LCA_plotter/blob/master/materials/profile_plot_pooled.png" width="600" height="500"/>
 </p>
