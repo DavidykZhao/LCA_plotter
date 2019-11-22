@@ -22,7 +22,7 @@
 ## Introduction
 This is a package built on top of utilities provided by the [poLCA](https://cran.r-project.org/web/packages/poLCA/index.html) package. 
 
-Latent class analysis (LCA), which uses a parametric model to place respondents into classes (or clusters) based on 
+Latent class analysis (LCA) or Latent profile analysis (LPA), which uses a parametric model to place respondents into classes (or clusters) based on 
 their response patterns. In LPA, the number of classes is determined by the expectation-maximization algorithm 
 which involves an iterative process until the model converges on a best fit for the data. 
 This involves the notion that there should be shared variance within the clusters, and that clusters should be 
