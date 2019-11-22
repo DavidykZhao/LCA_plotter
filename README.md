@@ -1,8 +1,22 @@
+
+
+
+
 # LCA_plotter
 ## Additional functionalities for LCA modeling
 
-This is a package built on top of utilities provided by the [poLCA](https://cran.r-project.org/web/packages/poLCA/index.html) package. 
 
+
+## Table of Contents  
+
+[Introduction](#introduction)  
+[Installation](#installation)  
+[Examples](#examples) 
+[References](#references)
+
+
+## Introduction
+This is a package built on top of utilities provided by the [poLCA](https://cran.r-project.org/web/packages/poLCA/index.html) package. 
 
 Latent class analysis (LCA), which uses a parametric model to place respondents into classes (or clusters) based on 
 their response patterns. In LPA, the number of classes is determined by the expectation-maximization algorithm 
@@ -19,6 +33,7 @@ The poLCA package only offers the following 3D plots:
 </p>
 
 This package aims to bridge the gap by providing additional plotting functions to better understand the model restuls.
+
 
 ## Installation
 
