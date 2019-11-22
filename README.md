@@ -3,17 +3,21 @@
 
 
 # LCA_plotter
-## Additional functionalities for LCA modeling
+##### Additional functionalities for LCA modeling
 
+
+<br>
 
 
 ## Table of Contents  
 
 [Introduction](#introduction)  
 [Installation](#installation)  
-[Examples](#examples) 
+[Examples](#examples)  
 [References](#references)
 
+
+<br>
 
 ## Introduction
 This is a package built on top of utilities provided by the [poLCA](https://cran.r-project.org/web/packages/poLCA/index.html) package. 
