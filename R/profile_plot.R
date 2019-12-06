@@ -108,3 +108,23 @@ find_best_fit =function(data, f, criteria = 'bic'){
 
   return(LCA_best_model)
 }
+
+
+
+#' Visualization of each latent class in stacked bar plot fashion
+#'
+#'
+#'
+#'
+#'
+lcmodel <- reshape2::melt(lc$probs, level=2)
+zp1 <- ggplot(lcmodel,aes(x = L1, y = value, fill = Var2))+
+  geom_bar(stat = "identity", position = "stack")+
+  facet_grid(Var1 ~ .) +
+  scale_fill_brewer(type="seq", palette="Greys") +theme_bw() +
+  labs(x = "",y="", fill ="")+
+  theme( axis.text.y=element_blank(),
+                    axis.ticks.y=element_blank(),
+                    panel.grid.major.y=element_blank())+
+  guides(fill = guide_legend(reverse=TRUE))
+
