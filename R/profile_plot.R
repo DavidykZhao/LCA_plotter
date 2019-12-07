@@ -128,16 +128,15 @@ stacked_bar_plot = function(model) {
   } else {
     manual_Palette = colorRampPalette(RColorBrewer::brewer.pal(level_multinomial, "Greys"))
   }
-  g = reshape2::melt(model$probs, level=2) %>%
-    ggplot(aes(x = L2, y = value, fill = Var2))+
+  g = reshape2::melt(model$probs) %>%
+    ggplot(aes(x = L1, y = value, fill = Var2))+
     geom_bar(stat = "identity", position = "stack")+
     facet_grid(Var1 ~ .) +
     scale_fill_manual(values = manual_Palette)+
     theme_bw() +
     labs(x = "Items",y="Prob. of the multinomial model", fill ="Levels")+
     labs(title = "Stacked barchart of Latent Class model")+
-    theme( axis.text.y=element_blank(),
-           axis.ticks.y=element_blank(),
+    theme(axis.ticks.y=element_blank(),
            panel.grid.major.y=element_blank())+
     guides(fill = guide_legend(reverse=TRUE))+
     coord_flip()

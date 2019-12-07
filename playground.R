@@ -85,8 +85,7 @@ stacked_bar_plot = function(model) {
     scale_fill_manual(values = manual_Palette)+
     theme_bw() +
     labs(x = "",y="", fill ="")+
-    theme( axis.text.y=element_blank(),
-           axis.ticks.y=element_blank(),
+    theme( axis.ticks.y=element_blank(),
            panel.grid.major.y=element_blank())+
     guides(fill = guide_legend(reverse=TRUE))
   print(g)

@@ -38,6 +38,13 @@ The poLCA package only offers the following 3D plots:
 
 This package aims to bridge the gap by providing additional plotting functions to better understand the model restuls.
 
+Acknowledgement: Please note that you have to use poLCA package to fit the latent model and the model object would be like following:
+
+![](materials/model_obj.gif)
+
+
+
+
 
 ## Installation
 
