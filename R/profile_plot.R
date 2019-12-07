@@ -90,7 +90,7 @@ profile_plot = function(data, model = NULL, num_var, f){
 #' @examples
 #' # Define a formula for the LDA modeling
 #' f = with(data, cbind(tax, religion, free_election, state_aid, civil_rights, women)~1)
-#' find_best_fit(data, f, criterion = 'bic') # This will yield the plot
+#' find_best_fit(data, form = f, criterion = 'bic') # This will yield the plot
 #'
 #'
 find_best_fit =function(data, form, criterion = 'bic'){
@@ -111,22 +111,38 @@ find_best_fit =function(data, form, criterion = 'bic'){
 
 
 
-#' Visualization of each latent class in stacked bar plot fashion
-#'
-#'
-#'
-#'
+#' Visualization of each latent class in a stacked bar plot fashion
+#' @param model This parameter expects to be the fitted latent class model object
+#' @return The stacked bar plot object; the plot will be printed
+#' @export
+#' @example
+#' # Find out the best model according to the BIC criterion
+#' best_model = find_best_fit(data, form, "bic")
+#' # Pass the model object into the stacked_bar_plot function
+#' stacked_bar_plot(best_model) # The function will print the plot and return the plot object
 #'
 stacked_bar_plot = function(model) {
-  reshape2::melt(model, level=2) %>%
-  ggplot(lcmodel,aes(x = L1, y = value, fill = Var2))+
-  geom_bar(stat = "identity", position = "stack")+
-  facet_grid(Var1 ~ .) +
-  scale_fill_brewer(type="seq", palette="Greys") +theme_bw() +
-  labs(x = "",y="", fill ="")+
-  theme( axis.text.y=element_blank(),
-                    axis.ticks.y=element_blank(),
-                    panel.grid.major.y=element_blank())+
-  guides(fill = guide_legend(reverse=TRUE))
+  level_multinomial = length(model$probs[[1]][1, ])
+  if(!is.null(level_multinomial) & level_multinomial > 9){
+    manual_Palette = colorRampPalette(RColorBrewer::brewer.pal(9, "Greys"))(level_multinomial)
+  } else {
+    manual_Palette = colorRampPalette(RColorBrewer::brewer.pal(level_multinomial, "Greys"))
+  }
+  g = reshape2::melt(model$probs, level=2) %>%
+    ggplot(aes(x = L2, y = value, fill = Var2))+
+    geom_bar(stat = "identity", position = "stack")+
+    facet_grid(Var1 ~ .) +
+    scale_fill_manual(values = manual_Palette)+
+    theme_bw() +
+    labs(x = "Items",y="Prob. of the multinomial model", fill ="Levels")+
+    labs(title = "Stacked barchart of Latent Class model")+
+    theme( axis.text.y=element_blank(),
+           axis.ticks.y=element_blank(),
+           panel.grid.major.y=element_blank())+
+    guides(fill = guide_legend(reverse=TRUE))+
+    coord_flip()
+
+  print(g)
+  return(g)
 }
 

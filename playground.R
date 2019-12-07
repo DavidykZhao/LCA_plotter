@@ -72,17 +72,34 @@ best_model = find_best_fit(US, f)
 
 
 stacked_bar_plot = function(model) {
-  reshape2::melt(model, level=2) %>%
-    ggplot(lcmodel,aes(x = L1, y = value, fill = Var2))+
+  level_multinomial = length(model$probs[[1]][1, ])
+  if(!is.null(level_multinomial) & level_multinomial > 9){
+    manual_Palette = colorRampPalette(RColorBrewer::brewer.pal(9, "Greys"))(level_multinomial)
+  } else {
+    manual_Palette = colorRampPalette(RColorBrewer::brewer.pal(level_multinomial, "Greys"))
+  }
+  g = reshape2::melt(model$probs, level=2) %>%
+    ggplot(aes(x = L2, y = value, fill = Var2))+
     geom_bar(stat = "identity", position = "stack")+
     facet_grid(Var1 ~ .) +
-    scale_fill_brewer(type="seq", palette="Greys") +theme_bw() +
+    scale_fill_manual(values = manual_Palette)+
+    theme_bw() +
     labs(x = "",y="", fill ="")+
     theme( axis.text.y=element_blank(),
            axis.ticks.y=element_blank(),
            panel.grid.major.y=element_blank())+
     guides(fill = guide_legend(reverse=TRUE))
+  print(g)
+  return(g)
 }
 
+stacked_bar_plot(best_model)
+poLCA(f, US, nclass=3,graphs=TRUE, na.rm=TRUE)
 
+head(best_model$probs)
+
+reshape2::melt(best_model$probs, level=2) %>%
+  ggplot(aes(x = L2, y = value, fill = Var2))+
+  geom_bar(stat = "identity", position = "stack")+
+  facet_grid(Var1 ~ .)
 
