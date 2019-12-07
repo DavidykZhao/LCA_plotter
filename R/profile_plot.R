@@ -145,3 +145,5 @@ stacked_bar_plot = function(model) {
   return(g)
 }
 
+
+

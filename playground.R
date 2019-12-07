@@ -102,3 +102,14 @@ reshape2::melt(best_model$probs, level=2) %>%
   geom_bar(stat = "identity", position = "stack")+
   facet_grid(Var1 ~ .)
 
+row.names(US) = 1:length(US[,1])
+US = rownames_to_column(US)
+colnames(US)[1] = "index"
+head(US)
+
+US[1:200, ] %>%
+  reshape2::melt(id = c("index", "country")) %>%
+  ggplot(aes(x = variable, y = value, group = index, color = index))+
+  geom_point() +
+  geom_line()
+

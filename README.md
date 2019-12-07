@@ -33,12 +33,12 @@ LCA has been extensively used in social science however it is poorly implemented
 The poLCA package only offers the following 3D plots:
 
 <p align="center">
-  <img src = "https://github.com/DavidykZhao/LCA_plotter/blob/master/materials/3dplot.png" width="460" height="300"/>
+  <img src = "materials/3dplot.png" width="460" height="300"/>
 </p>
 
 This package aims to bridge the gap by providing additional plotting functions to better understand the model restuls.
 
-Acknowledgement: Please note that you have to use poLCA package to fit the latent model and the model object would be like following:
+**Acknowledgement**: Please note that you have to use poLCA package to fit the latent model and the model object would be like following:
 
 <p align="center">
   <img width="460" height="300" src="materials/model_obj.gif">
@@ -67,7 +67,7 @@ f = with(data, cbind(tax, religion, free_election, state_aid, civil_rights, wome
 profile_plot(data, num_var, f) # This will yield the plot
 ```
 <p align="center">
-  <img src = "https://github.com/DavidykZhao/LCA_plotter/blob/master/materials/profile_plot_pooled.png" width="460" height="300"/>
+  <img src = "materials/profile_plot_pooled.png" width="460" height="300"/>
 </p>
 
 
