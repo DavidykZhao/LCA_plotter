@@ -1,11 +1,11 @@
 install.packages('poLCA')
 library(poLCA)
-dta = read.csv("nonzero_dataset.csv")
+library(tidyverse)
+dta = read.csv("materials/nonzero_dataset.csv")
 US = dta %>%
   filter(country == 'United States')
-f = with(data, cbind(tax, religion, free_election, state_aid, civil_rights, women)~1)
+f = with(US, cbind(tax, religion, free_election, state_aid, civil_rights, women)~1)
 
-library()
 
 
 profile_plot = function(data, num_var){
@@ -66,4 +66,23 @@ profile_plot = function(data, num_var){
 }
 
 profile_plot(US)
+
+
+best_model = find_best_fit(US, f)
+
+
+stacked_bar_plot = function(model) {
+  reshape2::melt(model, level=2) %>%
+    ggplot(lcmodel,aes(x = L1, y = value, fill = Var2))+
+    geom_bar(stat = "identity", position = "stack")+
+    facet_grid(Var1 ~ .) +
+    scale_fill_brewer(type="seq", palette="Greys") +theme_bw() +
+    labs(x = "",y="", fill ="")+
+    theme( axis.text.y=element_blank(),
+           axis.ticks.y=element_blank(),
+           panel.grid.major.y=element_blank())+
+    guides(fill = guide_legend(reverse=TRUE))
+}
+
+
 

@@ -82,26 +82,26 @@ profile_plot = function(data, model = NULL, num_var, f){
 
 #' Find the most fit model by grid search of number of models
 #' @param data The dataframe to pass in
-#' @param criteria The criteria to choose the best model, default to BIC
-#' @param f the formula for the LDA modeling
-#' @return The model object of the most fit model according to the criteria
+#' @param criterion The criterion to choose the best model, default to BIC
+#' @param form the formula for the LDA modeling
+#' @return The model object of the most fit model according to the criterion
 #' @export
 #'
 #' @examples
 #' # Define a formula for the LDA modeling
 #' f = with(data, cbind(tax, religion, free_election, state_aid, civil_rights, women)~1)
-#' find_best_fit(data, f, criteria = 'bic') # This will yield the plot
+#' find_best_fit(data, f, criterion = 'bic') # This will yield the plot
 #'
 #'
-find_best_fit =function(data, f, criteria = 'bic'){
+find_best_fit =function(data, form, criterion = 'bic'){
   #f = with(data, cbind(tax, religion, free_election, state_aid, civil_rights, women)~1)
-  min_bic <- 1000000
+  min_criterion <- 1000000
   for(i in 1:7){
-    lc <- poLCA(f, data, nclass=i, maxiter=3000,
+    lc <- poLCA(form, data, nclass=i, maxiter=3000,
                 tol=1e-5, na.rm=FALSE,
-                nrep=10, verbose=TRUE, calc.se=TRUE)
-    if(lc$criteria < min_criteria){
-      min_criteria <- lc$criteria
+                nrep = 10, verbose =TRUE, calc.se=TRUE)
+    if(lc[[criterion]] < min_criterion){
+      min_criterion <- lc[[criterion]]
       LCA_best_model <- lc
     }
   }
