@@ -107,9 +107,11 @@ US = rownames_to_column(US)
 colnames(US)[1] = "index"
 head(US)
 
-US[1:200, ] %>%
+US %>%
   reshape2::melt(id = c("index", "country")) %>%
   ggplot(aes(x = variable, y = value, group = index, color = index))+
-  geom_point() +
-  geom_line()
+  geom_smooth(method="loess", size= 0.5, se=F)+
+  theme(legend.position = "none")
+
+
 

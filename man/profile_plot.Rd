@@ -4,7 +4,7 @@
 \alias{profile_plot}
 \title{Function to produce a profile plot for a LDA model object}
 \usage{
-profile_plot(data, model, num_var, f)
+profile_plot(data, model = NULL, num_var, f)
 }
 \arguments{
 \item{data}{The dataframe to pass in}

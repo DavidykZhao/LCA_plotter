@@ -2,3 +2,4 @@
 
 export(find_best_fit)
 export(profile_plot)
+export(stacked_bar_plot)

@@ -18,10 +18,11 @@
 #'
 #'
 profile_plot = function(data, model = NULL, num_var, f){
+  library(tidyverse)
   f = with(data, cbind(tax, religion, free_election, state_aid, civil_rights, women)~1)
   min_bic <- 1000000
   for(i in 1:7){
-    lc <- poLCA(f, data, nclass=i, maxiter=3000,
+    lc <- poLCA::poLCA(f, data, nclass=i, maxiter=3000,
                 tol=1e-5, na.rm=FALSE,
                 nrep=10, verbose=TRUE, calc.se=TRUE)
     if(lc$bic < min_bic){
@@ -82,7 +83,8 @@ profile_plot = function(data, model = NULL, num_var, f){
 
 #' Find the most fit model by grid search of number of models
 #' @param data The dataframe to pass in
-#' @param criterion The criterion to choose the best model, default to BIC
+#' @param criterion The criterion to choose the best model, default to BIC.
+#' Possible options include "aic",
 #' @param form the formula for the LDA modeling
 #' @return The model object of the most fit model according to the criterion
 #' @export
@@ -122,6 +124,7 @@ find_best_fit =function(data, form, criterion = 'bic'){
 #' stacked_bar_plot(best_model) # The function will print the plot and return the plot object
 #'
 stacked_bar_plot = function(model) {
+  library(tidyverse)
   level_multinomial = length(model$probs[[1]][1, ])
   if(!is.null(level_multinomial) & level_multinomial > 9){
     manual_Palette = colorRampPalette(RColorBrewer::brewer.pal(9, "Greys"))(level_multinomial)
@@ -144,6 +147,7 @@ stacked_bar_plot = function(model) {
   print(g)
   return(g)
 }
+
 
 
 

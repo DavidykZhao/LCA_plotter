@@ -4,17 +4,17 @@
 \alias{find_best_fit}
 \title{Find the most fit model by grid search of number of models}
 \usage{
-find_best_fit(data, f, criteria = "bic")
+find_best_fit(data, form, criterion = "bic")
 }
 \arguments{
 \item{data}{The dataframe to pass in}
 
-\item{f}{the formula for the LDA modeling}
+\item{form}{the formula for the LDA modeling}
 
-\item{criteria}{The criteria to choose the best model, default to BIC}
+\item{criterion}{The criterion to choose the best model, default to BIC}
 }
 \value{
-The model object of the most fit model according to the criteria
+The model object of the most fit model according to the criterion
 }
 \description{
 Find the most fit model by grid search of number of models
@@ -22,7 +22,7 @@ Find the most fit model by grid search of number of models
 \examples{
 # Define a formula for the LDA modeling
 f = with(data, cbind(tax, religion, free_election, state_aid, civil_rights, women)~1)
-find_best_fit(data, f, criteria = 'bic') # This will yield the plot
+find_best_fit(data, form = f, criterion = 'bic') # This will yield the plot
 
 
 }
