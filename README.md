@@ -42,7 +42,9 @@ Acknowledgement: Please note that you have to use poLCA package to fit the laten
 
 ![](materials/model_obj.gif)
 
-
+<p align="center">
+  <img width="460" height="300" src="materials/model_obj.gif">
+</p>
 
 
 
