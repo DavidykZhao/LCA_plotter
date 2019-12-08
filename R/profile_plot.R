@@ -146,7 +146,7 @@ find_best_fit =function(data, form, criterion = 'bic', maximum_num_class = 7, ..
 #' palette from brewer.pal from RColorBrewer package
 #' @return The stacked bar plot object; the plot will be printed
 #' @export
-#' @example
+#' @examples
 #' # Find out the best model according to the BIC criterion
 #' best_model = find_best_fit(data, form, "bic")
 #' # Pass the model object into the stacked_bar_plot function
@@ -185,7 +185,7 @@ stacked_bar_by_class = function(model, color_palette = "Greys") {
 #' palette from brewer.pal from RColorBrewer package
 #' @return The stacked bar plot object; the plot object will be printed and returned
 #' @export
-#' @example
+#' @examples
 #' # Find out the best model according to the BIC criterion
 #' best_model = find_best_fit(data, form, "bic")
 #' # Pass the model object into the stacked_bar_plot function

@@ -6,6 +6,7 @@ US = dta %>%
   filter(country == 'United States')
 f = with(US, cbind(tax, religion, free_election, state_aid, civil_rights, women)~1)
 
+save(US, file="data/example_data.RData")
 
 
 profile_plot = function(data, num_var){

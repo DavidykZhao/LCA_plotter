@@ -18,3 +18,10 @@ The stacked bar plot object; the plot will be printed
 \description{
 Visualization of each latent class in a stacked bar plot fashion (facet by classes)
 }
+\examples{
+# Find out the best model according to the BIC criterion
+best_model = find_best_fit(data, form, "bic")
+# Pass the model object into the stacked_bar_plot function
+stacked_bar_plot(best_model) # The function will print the plot and return the plot object
+
+}

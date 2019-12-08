@@ -18,3 +18,14 @@ The stacked bar plot object; the plot object will be printed and returned
 \description{
 Visualization of each latent class in a stacked bar plot fashion (facet by item variables)
 }
+\examples{
+# Find out the best model according to the BIC criterion
+best_model = find_best_fit(data, form, "bic")
+# Pass the model object into the stacked_bar_plot function
+# The function will print the plot and return the plot object
+p = stacked_bar_plot(best_model)
+# If you want to further customize the plot, you could add more adjustments on top of
+the plot object. For example:
+p + theme(plot.margin=unit(c(1.5,1.5,1.5,1.2),"cm")) +
+  labs(title = "The title name that you want")
+}
