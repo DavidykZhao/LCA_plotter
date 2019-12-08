@@ -4,19 +4,28 @@
 \alias{profile_plot}
 \title{Function to produce a profile plot for a LDA model object}
 \usage{
-profile_plot(data, model = NULL, num_var, f)
+profile_plot(data, num_var, form, model = NULL, maximum_num_class = 7, ...)
 }
 \arguments{
-\item{data}{The dataframe to pass in}
+\item{data}{The dataframe to containing the item variables}
 
-\item{model}{the most fit model produced by the function find_best_fit}
+\item{num_var}{The number of the item variables put into the LCA modeling}
 
-\item{num_var}{The number of the variables put into the LCA modeling}
+\item{form}{the formula for the LDA modeling}
 
-\item{f}{the formula for the LDA modeling}
+\item{model}{the most fit model produced by the function find_best_fit. It is optional,
+if not provided, the functio will automatically find the most fit by the criterion of BIC.}
+
+\item{maximum_num_class}{If you input the data to let the function find out the most fit by the
+criterion of BIC, what is the maximum number of classes you want it in the search space; Optional, default to 7.
+If you input a model object in the model parameter, this parameter will be nullified. If you want to change the model
+selecting criterion other than BIC, pleas use find_best_fit function where you could customize the criterion.}
+
+\item{...}{The wrapper arguments for the poLCA fitting function in the poLCA package. All the arguments
+passed within here will be passed into the poLCA function.}
 }
 \value{
-The ggplot objects
+The ggplot objects; you could customize the plot on top of the returned ggplot object
 }
 \description{
 Function to produce a profile plot for a LDA model object
@@ -24,7 +33,11 @@ Function to produce a profile plot for a LDA model object
 \examples{
 # Define a formula for the LDA modeling
 f = with(data, cbind(tax, religion, free_election, state_aid, civil_rights, women)~1)
-profile_plot(data, num_var, f) # This will yield the plot
+p = profile_plot(data, num_var, f) # This will yield the plot
+# If you want to further customize the plot, you could add more adjustments on top of
+the plot object. For example:
+p + theme(plot.margin=unit(c(1.5,1.5,1.5,1.2),"cm")) +
+  labs(title = "The title name that you want")
 
 
 

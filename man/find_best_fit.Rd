@@ -4,7 +4,7 @@
 \alias{find_best_fit}
 \title{Find the most fit model by grid search of number of models}
 \usage{
-find_best_fit(data, form, criterion = "bic")
+find_best_fit(data, form, criterion = "bic", maximum_num_class = 7, ...)
 }
 \arguments{
 \item{data}{The dataframe to pass in}
@@ -12,7 +12,14 @@ find_best_fit(data, form, criterion = "bic")
 \item{form}{the formula for the LDA modeling}
 
 \item{criterion}{The criterion to choose the best model, default to BIC.
-Possible options include "aic",}
+Possible options include "aic","Gsq" and "llike"}
+
+\item{maximum_num_class}{If you input the data to let the function find out the most fit by the
+criterion of BIC, what is the maximum number of classes you want it in the search space; Optional, default to 7.
+If you input a model object in the model parameter, this parameter will be nullified.}
+
+\item{...}{The wrapper arguments for the poLCA fitting function in the poLCA package. All the arguments
+passed within here will be passed into the poLCA function.}
 }
 \value{
 The model object of the most fit model according to the criterion
@@ -23,7 +30,9 @@ Find the most fit model by grid search of number of models
 \examples{
 # Define a formula for the LDA modeling
 f = with(data, cbind(tax, religion, free_election, state_aid, civil_rights, women)~1)
-find_best_fit(data, form = f, criterion = 'bic') # This will yield the plot
+# This will yield the best model according to the criterion. The model object could be
+# passed into further ploting functions
+best_model = find_best_fit(data, form = f, criterion = 'bic')
 
 
 }

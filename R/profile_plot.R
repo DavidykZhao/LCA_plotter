@@ -142,6 +142,8 @@ find_best_fit =function(data, form, criterion = 'bic', maximum_num_class = 7, ..
 
 #' Visualization of each latent class in a stacked bar plot fashion (facet by classes)
 #' @param model This parameter expects to be the fitted latent class model object
+#' @param color_palette The color palette for the plot; default at "Greys," you could change to any
+#' palette from brewer.pal from RColorBrewer package
 #' @return The stacked bar plot object; the plot will be printed
 #' @export
 #' @example
@@ -150,14 +152,14 @@ find_best_fit =function(data, form, criterion = 'bic', maximum_num_class = 7, ..
 #' # Pass the model object into the stacked_bar_plot function
 #' stacked_bar_plot(best_model) # The function will print the plot and return the plot object
 #'
-stacked_bar_by_class = function(model) {
+stacked_bar_by_class = function(model, color_palette = "Greys") {
   require(tidyverse)
   require(poLCA)
   level_multinomial = length(model$probs[[1]][1, ])
-  if(!is.null(level_multinomial) & level_multinomial > 9){
-    manual_Palette = colorRampPalette(RColorBrewer::brewer.pal(9, "Greys"))(level_multinomial)
+  if(!is.null(level_multinomial) & level_multinomial > 8){
+    manual_Palette = colorRampPalette(RColorBrewer::brewer.pal(8, color_palette))(level_multinomial)
   } else {
-    manual_Palette = colorRampPalette(RColorBrewer::brewer.pal(level_multinomial, "Greys"))
+    manual_Palette = colorRampPalette(RColorBrewer::brewer.pal(level_multinomial, color_palette))
   }
   g = reshape2::melt(model$probs) %>%
     ggplot(aes(x = L1, y = value, fill = Var2))+
@@ -179,6 +181,8 @@ stacked_bar_by_class = function(model) {
 
 #' Visualization of each latent class in a stacked bar plot fashion (facet by item variables)
 #' @param model This parameter expects to be the fitted latent class model object
+#' @param color_palette The color palette for the plot; default at "Greys," you could change to any
+#' palette from brewer.pal from RColorBrewer package
 #' @return The stacked bar plot object; the plot object will be printed and returned
 #' @export
 #' @example
@@ -191,16 +195,23 @@ stacked_bar_by_class = function(model) {
 #' the plot object. For example:
 #' p + theme(plot.margin=unit(c(1.5,1.5,1.5,1.2),"cm")) +
 #'   labs(title = "The title name that you want")
-stacked_bar_by_item = function(model) {
+stacked_bar_by_item = function(model, color_palette = "Greys") {
   require(tidyverse)
   require(poLCA)
   require(RColorBrewer)
 
+  # Compatibility check on color palette
+  if(!color_palette %in% rownames(brewer.pal.info)) {
+      stop("Please make sure the color_palette you provdied
+           exists in the color palette in RColorBrewer package,
+           you could find them using display.brewer.all() function")
+  }
+
   level_multinomial = length(model$probs[[1]][1, ])
-  if(!is.null(level_multinomial) & level_multinomial > 9){
-    manual_Palette = colorRampPalette(brewer.pal(9, "Greys"))(level_multinomial)
+  if(!is.null(level_multinomial) & level_multinomial > 8){
+    manual_Palette = colorRampPalette(brewer.pal(8, color_palette))(level_multinomial)
   } else {
-    manual_Palette = colorRampPalette(brewer.pal(level_multinomial, "Greys"))
+    manual_Palette = colorRampPalette(brewer.pal(level_multinomial, color_palette))
   }
   g = reshape2::melt(model$probs) %>%
     ggplot(aes(x = Var1, y = value, fill = Var2))+

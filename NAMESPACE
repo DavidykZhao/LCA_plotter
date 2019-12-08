@@ -2,4 +2,5 @@
 
 export(find_best_fit)
 export(profile_plot)
-export(stacked_bar_plot)
+export(stacked_bar_by_class)
+export(stacked_bar_by_item)
