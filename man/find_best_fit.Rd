@@ -11,7 +11,8 @@ find_best_fit(data, form, criterion = "bic")
 
 \item{form}{the formula for the LDA modeling}
 
-\item{criterion}{The criterion to choose the best model, default to BIC}
+\item{criterion}{The criterion to choose the best model, default to BIC.
+Possible options include "aic",}
 }
 \value{
 The model object of the most fit model according to the criterion
