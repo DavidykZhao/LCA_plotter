@@ -86,10 +86,12 @@ profile_plot = function(data, num_var, form, model = NULL, maximum_num_class = 7
     ggtitle(paste(paste("class", 1:length(LCA_best_model$P), sep = "_"),
                   round(LCA_best_model$P, 3), collapse = ", "))+
     theme(axis.text.x = element_text(angle = 45, hjust = 1))+
-    theme(plot.title = element_text(hjust = 0.5)
-    return(p)
+    theme(plot.title = element_text(hjust = 0.5))
+
+  return(p)
 
 }
+
 
 
 

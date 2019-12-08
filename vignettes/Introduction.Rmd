@@ -148,11 +148,11 @@ The profile plot looks like the following:
 To construc profile plot, you could run the profile_plot function: 
 
 ```{r, eval = F}
-plot = profile_plot(democracy, num_var = 6, model = NULL, form = formula, maximum_num_class = 2)
+plot = profile_plot(democracy, num_var = 6, model = NULL, form = formula, maximum_num_class = 3)
 ```
 
 ```{r, message= F, warning = F, eval = T, include= F}
-plot = profile_plot(democracy, num_var = 6, model = NULL, form = formula, maximum_num_class = 2)
+plot = profile_plot(democracy, num_var = 6, model = NULL, form = formula, maximum_num_class = 3)
 ```
 
 ```{r}
