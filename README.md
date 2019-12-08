@@ -63,7 +63,7 @@ could be found in the materials folder. This data set contains data from 22 coun
 ```{r}
 library(poLCA)
 # Define a formula for the LDA modeling
-f = with(data, cbind(tax, religion, free_election, state_aid, civil_rights, women)~1)
+formula = with(data, cbind(tax, religion, free_election, state_aid, civil_rights, women)~1)
 profile_plot(data, num_var, f) # This will yield the plot
 ```
 <p align="center">
