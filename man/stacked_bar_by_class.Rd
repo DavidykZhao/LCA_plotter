@@ -13,7 +13,7 @@ stacked_bar_by_class(model, color_palette = "Greys")
 palette from brewer.pal from RColorBrewer package}
 }
 \value{
-The stacked bar plot object; the plot will be printed
+The stacked bar plot object
 }
 \description{
 Visualization of each latent class in a stacked bar plot fashion (facet by classes)
@@ -22,6 +22,6 @@ Visualization of each latent class in a stacked bar plot fashion (facet by class
 # Find out the best model according to the BIC criterion
 best_model = find_best_fit(data, form, "bic")
 # Pass the model object into the stacked_bar_plot function
-stacked_bar_plot(best_model) # The function will print the plot and return the plot object
+stacked_bar_plot(best_model) # The function will return the plot object
 
 }

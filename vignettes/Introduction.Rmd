@@ -10,7 +10,8 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  dpi=100
 )
 ```
 
@@ -155,14 +156,14 @@ plot = profile_plot(democracy, num_var = 6, model = NULL, form = formula, maximu
 plot = profile_plot(democracy, num_var = 6, model = NULL, form = formula, maximum_num_class = 3)
 ```
 
-```{r}
+```{r, fig.height = 3.5, fig.width = 4, fig.align = "center"}
 print(plot)
 ```
 
 
 The plot object has been returned and it could be further customized by adding more ggplot syntax. For example:
 
-```{r}
+```{r, fig.height = 3.5, fig.width = 4, fig.align = "center"}
 print(plot + 
         ggtitle("A test title"))
 ```
@@ -173,6 +174,8 @@ profile_plot function also wraps in the parameters for the poLCA package. Thus i
 ### stacked_bar plots
 
 There are two operationalization for the stacked_bar plots
+
+
 1. stacked_bar_by_class
 2. stacked_bar_by_item
 
@@ -182,8 +185,9 @@ There are two operationalization for the stacked_bar plots
 
 This is the stacked bar plot facetted by the different classes. Each class would have its own 'window' and within each 'window' you could view its correponding probabilities for each item response. An example would look like this:
 
-```{r}
+```{r, fig.height = 6, fig.width = 6, fig.align = "center"}
 p = stacked_bar_by_class(best_model)
+print(p)
 ```
 
 This plot offers us a direct comparison of answer patterns for each item response variable WITHIN a certain class. For example, in class 1, the 'women', 'free election', and 'civil rights' are generally more agreed than 'taxation', 'staet aid', and 'religion.' However, the class 3 shows a huge contrasts with class 1 in that ALL of the item response variables are less agreeed upon than class 1. 
@@ -192,27 +196,36 @@ The return object is a ggplot object which supports further custmization of ggpl
 
 Further, this function supports the color palatte from the **RColorBrewer** package. The default palatte used is called "Greys". You could customize the color palette simply by:
 
-```{r}
+```{r, fig.height = 6, fig.width = 6, fig.align = "center"}
 p = stacked_bar_by_class(best_model, color_palette = 'Set2')
 
+print(p)
 ```
+
 
 All of the color palettes could be view from below:
 
-```{r}
+```{r, fig.height = 6, fig.width = 6, fig.align = "center"}
 RColorBrewer::display.brewer.all()
 ```
 
+
 #### stacked_bar_by_item plot
+
+
 
 This is the stacked bar plot facetted by the different items. Each item would have its own 'window' (facets) and within each facets you could view its correponding probabilities for each class (clusters). An example would look like this:
 
-```{r}
-p = stacked_bar_by_item(best_model)
 
+```{r, fig.height = 6, fig.width = 6, fig.align = "center"}
+p = stacked_bar_by_item(best_model)
+print(p)
 ```
 
+<br>
+
 This plot offers us direct comparison of the differences between classes on each item response. For example, we could view directly that for the women rights variable, the class 1 is way higher compared with the other two classes.
+
 
 You could change the color palettes as well by specifying the color_palette paramter.
 
