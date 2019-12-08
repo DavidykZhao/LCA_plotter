@@ -70,6 +70,10 @@ profile_plot(data, num_var, f) # This will yield the plot
   <img src = "materials/profile_plot_pooled.png" width="460" height="300"/>
 </p>
 
+## Vignette
+For more detailed introduction to the package, please refer [here](https://github.com/DavidykZhao/LCA_plotter/blob/master/vignettes/Vignette%20of%20LCAplotter.pdf) for more details.
+
+If you encounter any issue with the package, please feel free to file and issue.
 
 
 ## References:
