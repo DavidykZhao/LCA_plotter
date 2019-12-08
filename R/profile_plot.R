@@ -19,8 +19,8 @@
 #' # Define a formula for the LDA modeling
 #' f = with(data, cbind(tax, religion, free_election, state_aid, civil_rights, women)~1)
 #' p = profile_plot(data, num_var, f) # This will yield the plot
-#' # If you want to further customize the plot, you could add more adjustments on top of
-#' the plot object. For example:
+#' # If you want to further customize the plot, you could add
+#' more adjustments on top of the plot object. For example:
 #' p + theme(plot.margin=unit(c(1.5,1.5,1.5,1.2),"cm")) +
 #'   labs(title = "The title name that you want")
 #'
@@ -37,7 +37,7 @@ profile_plot = function(data, num_var, form, model = NULL, maximum_num_class = 7
     #f = with(data, cbind(tax, religion, free_election, state_aid, civil_rights, women)~1)
     min_bic <- 1000000
     for(i in 1:maximum_num_class){
-      lc <- poLCA::poLCA(form, data, nclass=i, ...)
+      lc <- poLCA::poLCA(form, data, nclass=i, maxiter = 3000, ...)
       if(lc$bic < min_bic){
         min_bic <- lc$bic
         LCA_best_model <- lc
@@ -80,16 +80,13 @@ profile_plot = function(data, num_var, form, model = NULL, maximum_num_class = 7
   profile_long = reshape::melt(profile_tb, id.vars = "class")
 
   p = ggplot(profile_long, aes(x = variable, y = value, group = class, color = class)) +
-    geom_point(size = 2.25, aes(shape = class))+
-    geom_line(size = 1.00) +
+    geom_point(aes(shape = class))+
+    geom_line() +
     labs(x = NULL, y = "Mean value of the response") +
-    theme_bw(base_size = 12)+
     ggtitle(paste(paste("class", 1:length(LCA_best_model$P), sep = "_"),
                   round(LCA_best_model$P, 3), collapse = ", "))+
-    theme(plot.margin=unit(c(1.5,1.5,1.5,1.2),"cm"))+
-    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 13))+
-    theme(plot.title = element_text(hjust = 0.5, size = 10))
-    print(p)
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))+
+    theme(plot.title = element_text(hjust = 0.5)
     return(p)
 
 }
@@ -127,7 +124,7 @@ find_best_fit =function(data, form, criterion = 'bic', maximum_num_class = 7, ..
   require(poLCA)
   min_criterion <- 1000000
   for(i in 1:maximum_num_class){
-    lc <- poLCA(form, data, nclass=i, ...)
+    lc <- poLCA(form, data, nclass=i, maxiter = 3000, ...)
     if(lc[[criterion]] < min_criterion){
       min_criterion <- lc[[criterion]]
       LCA_best_model <- lc
@@ -144,13 +141,13 @@ find_best_fit =function(data, form, criterion = 'bic', maximum_num_class = 7, ..
 #' @param model This parameter expects to be the fitted latent class model object
 #' @param color_palette The color palette for the plot; default at "Greys," you could change to any
 #' palette from brewer.pal from RColorBrewer package
-#' @return The stacked bar plot object; the plot will be printed
+#' @return The stacked bar plot object
 #' @export
 #' @examples
 #' # Find out the best model according to the BIC criterion
 #' best_model = find_best_fit(data, form, "bic")
 #' # Pass the model object into the stacked_bar_plot function
-#' stacked_bar_plot(best_model) # The function will print the plot and return the plot object
+#' stacked_bar_plot(best_model) # The function will return the plot object
 #'
 stacked_bar_by_class = function(model, color_palette = "Greys") {
   require(tidyverse)
@@ -174,7 +171,6 @@ stacked_bar_by_class = function(model, color_palette = "Greys") {
     guides(fill = guide_legend(reverse=TRUE))+
     coord_flip()
 
-  print(g)
   return(g)
 }
 
@@ -183,13 +179,13 @@ stacked_bar_by_class = function(model, color_palette = "Greys") {
 #' @param model This parameter expects to be the fitted latent class model object
 #' @param color_palette The color palette for the plot; default at "Greys," you could change to any
 #' palette from brewer.pal from RColorBrewer package
-#' @return The stacked bar plot object; the plot object will be printed and returned
+#' @return The stacked bar plot object; the plot object will be returned
 #' @export
 #' @examples
 #' # Find out the best model according to the BIC criterion
 #' best_model = find_best_fit(data, form, "bic")
 #' # Pass the model object into the stacked_bar_plot function
-#' # The function will print the plot and return the plot object
+#' # The function will return the plot object
 #' p = stacked_bar_plot(best_model)
 #' # If you want to further customize the plot, you could add more adjustments on top of
 #' the plot object. For example:
@@ -225,8 +221,6 @@ stacked_bar_by_item = function(model, color_palette = "Greys") {
           panel.grid.major.y=element_blank())+
     guides(fill = guide_legend(reverse=TRUE))+
     coord_flip()
-
-  print(g)
   return(g)
 }
 

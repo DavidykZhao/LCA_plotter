@@ -2,9 +2,9 @@ install.packages('poLCA')
 library(poLCA)
 library(tidyverse)
 dta = read.csv("materials/nonzero_dataset.csv")
-US = dta %>%
+democracy = dta %>%
   filter(country == 'United States')
-f = with(US, cbind(tax, religion, free_election, state_aid, civil_rights, women)~1)
+f = with(democracy, cbind(tax, religion, free_election, state_aid, civil_rights, women)~1)
 
 save(US, file="data/example_data.RData")
 

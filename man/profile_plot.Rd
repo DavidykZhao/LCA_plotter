@@ -34,8 +34,8 @@ Function to produce a profile plot for a LDA model object
 # Define a formula for the LDA modeling
 f = with(data, cbind(tax, religion, free_election, state_aid, civil_rights, women)~1)
 p = profile_plot(data, num_var, f) # This will yield the plot
-# If you want to further customize the plot, you could add more adjustments on top of
-the plot object. For example:
+# If you want to further customize the plot, you could add
+more adjustments on top of the plot object. For example:
 p + theme(plot.margin=unit(c(1.5,1.5,1.5,1.2),"cm")) +
   labs(title = "The title name that you want")
 
